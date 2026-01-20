@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundations of Phenomenological Inquiry | EDL 599</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-purple: #4a1c6b;
+            --royal-purple: #6b2d8b;
+            --soft-purple: #8b5aa8;
+            --lavender: #b794c7;
+            --gold: #c9a227;
+            --light-gold: #e6c85a;
+            --cream: #faf8f5;
+            --warm-white: #fffef9;
+            --text-dark: #2d2438;
+            --text-muted: #5a4d66;
+            --border-light: rgba(74, 28, 107, 0.12);
+            --success-green: #2d8b4e;
+            --info-blue: #2d6b8b;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Serif 4', 'Times New Roman', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: linear-gradient(180deg, var(--cream) 0%, var(--warm-white) 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            background: var(--deep-purple);
+            color: white;
+            padding: 12px 24px;
+            z-index: 1000;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0 0 8px 0;
+            transition: top 0.3s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: 3px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--deep-purple) 0%, var(--royal-purple) 100%);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .week-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--deep-purple);
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .module-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+            font-weight: 700;
+            margin: 0.5rem 0;
+            line-height: 1.2;
+        }
+
+        .epigraph {
+            font-style: italic;
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin: 1.5rem 0 0.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--gold);
+        }
+
+        .epigraph-source {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-left: 1.5rem;
+        }
+
+        /* Navigation */
+        .module-nav {
+            background: white;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 1rem 1.25rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--deep-purple);
+            background: var(--cream);
+        }
+
+        .nav-link.active {
+            color: var(--deep-purple);
+            border-bottom-color: var(--gold);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 20px rgba(74, 28, 107, 0.06);
+            border: 1px solid var(--border-light);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.6rem;
+            color: var(--deep-purple);
+            margin: 0 0 1.25rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2 .icon {
+            font-size: 1.4rem;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--royal-purple);
+            margin: 1.75rem 0 0.75rem 0;
+        }
+
+        h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin: 1.25rem 0 0.5rem 0;
+        }
+
+        p {
+            margin: 0 0 1rem 0;
+        }
+
+        /* Note Box */
+        .note-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+            border: 1px solid var(--gold);
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .note-box .note-title {
+            font-weight: 600;
+            color: var(--deep-purple);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .note-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Key Concepts Cards */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .concept-card {
+            background: var(--cream);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 28, 107, 0.12);
+        }
+
+        .concept-card h4 {
+            color: var(--deep-purple);
+            margin: 0 0 0.75rem 0;
+            font-size: 1.15rem;
+        }
+
+        .concept-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .concept-card .concept-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--deep-purple), var(--royal-purple));
+            border-radius: 8px;
+            color: white;
+            font-size: 1.25rem;
+            line-height: 40px;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--deep-purple), var(--gold));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.35rem;
+            width: 14px;
+            height: 14px;
+            background: white;
+            border: 3px solid var(--deep-purple);
+            border-radius: 50%;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--deep-purple);
+            font-size: 0.95rem;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0.25rem 0;
+        }
+
+        .timeline-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Leadership Section */
+        .leadership-why {
+            display: grid;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .leadership-card {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--gold);
+        }
+
+        .leadership-card h4 {
+            color: var(--deep-purple);
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .leadership-card .contrast {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contrast-item {
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .contrast-item.instead {
+            background: #f5f0f0;
+            border: 1px solid #ddd;
+        }
+
+        .contrast-item.instead::before {
+            content: 'Instead of:';
+            display: block;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .contrast-item.phenomenology {
+            background: linear-gradient(135deg, #f5f0f7 0%, #efe8f3 100%);
+            border: 1px solid var(--lavender);
+        }
+
+        .contrast-item.phenomenology::before {
+            content: 'Phenomenology invites:';
+            display: block;
+            font-weight: 600;
+            color: var(--deep-purple);
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .example-box {
+            background: var(--cream);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .example-box::before {
+            content: '💡 Example in Practice:';
+            display: block;
+            font-weight: 600;
+            color: var(--deep-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Activities Section */
+        .activity-card {
+            background: white;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .activity-header {
+            background: linear-gradient(135deg, var(--deep-purple) 0%, var(--royal-purple) 100%);
+            color: white;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .activity-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .activity-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-required {
+            background: var(--gold);
+            color: var(--deep-purple);
+        }
+
+        .badge-time {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .activity-body {
+            padding: 1.5rem;
+        }
+
+        .activity-purpose {
+            background: var(--cream);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .instructions-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.25rem 0;
+            counter-reset: step;
+        }
+
+        .instructions-list li {
+            counter-increment: step;
+            padding: 0.75rem 0 0.75rem 3rem;
+            position: relative;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .instructions-list li:last-child {
+            border-bottom: none;
+        }
+
+        .instructions-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, var(--deep-purple), var(--royal-purple));
+            color: white;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Resource Buttons */
+        .resources-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.25rem 0;
+        }
+
+        .resource-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            border: 2px solid var(--deep-purple);
+            color: var(--deep-purple);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .resource-btn:hover {
+            background: var(--deep-purple);
+            color: white;
+        }
+
+        .resource-btn.primary {
+            background: var(--deep-purple);
+            color: white;
+        }
+
+        .resource-btn.primary:hover {
+            background: var(--royal-purple);
+        }
+
+        /* Submission Box */
+        .submission-box {
+            background: linear-gradient(135deg, #e8f4ea 0%, #d8edd8 100%);
+            border: 1px solid #a8d5a8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .submission-box h4 {
+            color: var(--success-green);
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-requirements {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .file-requirements ul {
+            margin: 0.5rem 0 0 0;
+            padding-left: 1.25rem;
+        }
+
+        .file-requirements li {
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .submit-note {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Discussion Forum */
+        .discussion-card {
+            background: linear-gradient(135deg, #e8eef4 0%, #dde6ed 100%);
+            border: 1px solid #a8c5d5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .discussion-card h3 {
+            color: var(--info-blue);
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .discussion-prompt {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .discussion-prompt ol {
+            margin: 0.75rem 0 0 0;
+            padding-left: 1.25rem;
+        }
+
+        .discussion-prompt li {
+            margin-bottom: 0.5rem;
+        }
+
+        .peer-response {
+            background: #f0f5f8;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .grading-info {
+            background: white;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .points-badge {
+            background: var(--gold);
+            color: var(--deep-purple);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Expandable Sections */
+        .expandable {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .expandable-header {
+            background: var(--cream);
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--deep-purple);
+            transition: background 0.2s ease;
+        }
+
+        .expandable-header:hover {
+            background: #f0e8f5;
+        }
+
+        .expandable-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 400;
+            transition: transform 0.3s ease;
+        }
+
+        .expandable.open .expandable-header::after {
+            content: '−';
+        }
+
+        .expandable-content {
+            padding: 0 1.25rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .expandable.open .expandable-content {
+            padding: 1.25rem;
+            max-height: 2000px;
+        }
+
+        /* Reading List */
+        .reading-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .reading-item:last-child {
+            border-bottom: none;
+        }
+
+        .reading-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .reading-pages {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .reading-note {
+            background: var(--cream);
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1.25rem 1.5rem;
+            }
+
+            main {
+                padding: 1.5rem 1rem 3rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .concepts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leadership-card .contrast {
+                grid-template-columns: 1fr;
+            }
+
+            .activity-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-link {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Print */
+        @media print {
+            .module-nav, .skip-link {
+                display: none;
+            }
+
+            section {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <span class="week-badge">Week 1</span>
+            <h1 class="module-title">Foundations of Phenomenological Inquiry</h1>
+            <p class="epigraph">"To the things themselves!"</p>
+            <p class="epigraph-source">— Edmund Husserl, <em>Logical Investigations</em></p>
+        </div>
+    </header>
+
+    <nav class="module-nav" aria-label="Module navigation">
+        <div class="nav-container">
+            <a href="#overview" class="nav-link active">Overview</a>
+            <a href="#concepts" class="nav-link">Key Concepts</a>
+            <a href="#history" class="nav-link">History</a>
+            <a href="#leadership" class="nav-link">Leadership</a>
+            <a href="#activities" class="nav-link">Activities</a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Important Note -->
+        <div class="note-box">
+            <div class="note-title">📝 Important Note for Students</div>
+            <p>You may write directly into interactive elements within this course module for your own learning and reference. However, <strong>you must copy your work and submit all documents via Blackboard</strong> for grading purposes. Work completed only within this module will not be saved or graded.</p>
+        </div>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" aria-labelledby="overview-heading">
+            <h2 id="overview-heading"><span class="icon">📚</span> Overview</h2>
+            
+            <p>Welcome to your first week of exploring phenomenology as a research methodology for educational leadership. This foundational module introduces you to the philosophical underpinnings and practical applications of phenomenological inquiry—a powerful approach to understanding the lived experiences of those we serve and lead.</p>
+
+            <p>Phenomenology asks us to set aside our assumptions, theories, and preconceptions to examine experience as it presents itself. For educational leaders, this means learning to see schools, classrooms, and educational phenomena with fresh eyes—attending to how policies, practices, and decisions are actually lived by teachers, students, families, and communities.</p>
+
+            <h3>This Week's Learning Objectives</h3>
+            <p>By the end of this week, you will be able to:</p>
+            <ul>
+                <li>Define phenomenology and explain its core philosophical commitments</li>
+                <li>Identify the key concepts of lived experience, intentionality, bracketing, phenomenological reduction, and essence</li>
+                <li>Trace the historical development of phenomenology from Husserl to contemporary applications</li>
+                <li>Articulate why phenomenology is particularly valuable for educational leadership research</li>
+                <li>Begin developing your own phenomenological lens for examining educational phenomena</li>
+            </ul>
+
+            <h3>Required Readings</h3>
+            <div class="expandable" id="readings-expand">
+                <div class="expandable-header">View This Week's Readings</div>
+                <div class="expandable-content">
+                    <p><strong>From: Weiss, Murphy, & Salamon (2020). <em>50 Concepts for a Critical Phenomenology</em></strong></p>
+                    <div class="reading-item">
+                        <div class="reading-title">Introduction</div>
+                        <div class="reading-pages">Pages xi-xiv</div>
+                        <div class="reading-note">📌 Focus on: The goals and scope of critical phenomenology</div>
+                    </div>
+                    <div class="reading-item">
+                        <div class="reading-title">Critical Phenomenology</div>
+                        <div class="reading-pages">Pages 11-16</div>
+                        <div class="reading-note">📌 Focus on: How critical phenomenology differs from classical approaches</div>
+                    </div>
+                    <div class="reading-item">
+                        <div class="reading-title">Phenomenological Reduction</div>
+                        <div class="reading-pages">Pages 267-273</div>
+                        <div class="reading-note">📌 Focus on: The process and purpose of reduction</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY CONCEPTS SECTION -->
+        <section id="concepts" aria-labelledby="concepts-heading">
+            <h2 id="concepts-heading"><span class="icon">🔑</span> Key Concepts</h2>
+            
+            <p>Phenomenology has its own vocabulary—a set of technical terms that carry specific meanings within this philosophical tradition. Understanding these foundational concepts is essential for engaging with phenomenological literature and developing your own phenomenological research approach.</p>
+
+            <div class="concepts-grid">
+                <div class="concept-card" tabindex="0" role="button" aria-expanded="false">
+                    <div class="concept-icon">🌟</div>
+                    <h4>Lived Experience <em>(Erlebnis)</em></h4>
+                    <p>The immediate, pre-reflective experience as it is lived through before we analyze, categorize, or explain it. Phenomenology seeks to return to and describe this primary layer of experience.</p>
+                </div>
+
+                <div class="concept-card" tabindex="0" role="button" aria-expanded="false">
+                    <div class="concept-icon">🎯</div>
+                    <h4>Intentionality</h4>
+                    <p>Consciousness is always consciousness <em>of</em> something. Our minds are always directed toward objects, ideas, or experiences. This directedness is the fundamental structure of consciousness.</p>
+                </div>
+
+                <div class="concept-card" tabindex="0" role="button" aria-expanded="false">
+                    <div class="concept-icon">🔲</div>
+                    <h4>Bracketing <em>(Epoché)</em></h4>
+                    <p>The deliberate suspension of our natural attitude—our taken-for-granted assumptions, theories, and judgments—to see phenomena as they appear without our usual interpretive filters.</p>
+                </div>
+
+                <div class="concept-card" tabindex="0" role="button" aria-expanded="false">
+                    <div class="concept-icon">🔬</div>
+                    <h4>Phenomenological Reduction</h4>
+                    <p>The methodological process of stripping away interpretive layers to focus on the essential structures of experience. It involves moving from the particular to the universal structures of a phenomenon.</p>
+                </div>
+
+                <div class="concept-card" tabindex="0" role="button" aria-expanded="false">
+                    <div class="concept-icon">💎</div>
+                    <h4>Essence <em>(Eidos)</em></h4>
+                    <p>The invariant, necessary features that make a phenomenon what it is. Phenomenology seeks to identify these essential structures that remain constant across different instances of experience.</p>
+                </div>
+            </div>
+
+            <div class="note-box" style="margin-top: 2rem;">
+                <div class="note-title">💡 Making Connections</div>
+                <p>As you encounter these concepts in the readings, consider: How might each concept apply to understanding experiences in your school or district? What would it mean to "bracket" your assumptions about a persistent challenge you face?</p>
+            </div>
+        </section>
+
+        <!-- HISTORY SECTION -->
+        <section id="history" aria-labelledby="history-heading">
+            <h2 id="history-heading"><span class="icon">📜</span> Historical Development</h2>
+            
+            <p>Phenomenology emerged in the early 20th century as a rigorous philosophical method and has since evolved through multiple generations of thinkers. Understanding this intellectual lineage helps us appreciate both the foundations and the contemporary developments of phenomenological thought.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1900-1901</div>
+                    <div class="timeline-title">Edmund Husserl: The Founding of Phenomenology</div>
+                    <div class="timeline-desc">Husserl's <em>Logical Investigations</em> establishes phenomenology as a rigorous philosophical method. His rallying cry—"To the things themselves!"—calls for a return to immediate experience, free from theoretical presuppositions.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">1927</div>
+                    <div class="timeline-title">Martin Heidegger: Existential Turn</div>
+                    <div class="timeline-desc">Heidegger's <em>Being and Time</em> transforms phenomenology by focusing on human existence (Dasein) and our being-in-the-world. He emphasizes that we are always already embedded in a world of meaning.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">1945</div>
+                    <div class="timeline-title">Maurice Merleau-Ponty: Embodied Perception</div>
+                    <div class="timeline-desc"><em>Phenomenology of Perception</em> centers the lived body as the primary site of knowing the world. Our bodies are not objects we have but the way we inhabit and experience the world.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">1949</div>
+                    <div class="timeline-title">Simone de Beauvoir: Gendered Experience</div>
+                    <div class="timeline-desc"><em>The Second Sex</em> applies phenomenological analysis to women's lived experience, demonstrating how gender shapes our embodied existence and social positioning.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">1952</div>
+                    <div class="timeline-title">Frantz Fanon: Racialized Experience</div>
+                    <div class="timeline-desc"><em>Black Skin, White Masks</em> reveals how race fundamentally structures lived experience, particularly the experience of being seen and positioned by others in racist societies.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Present</div>
+                    <div class="timeline-title">Critical Phenomenology</div>
+                    <div class="timeline-desc">Contemporary scholars like Sara Ahmed, Iris Marion Young, and others extend phenomenology to examine how power, marginalization, and social structures shape lived experience—the foundation of our course.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEADERSHIP SECTION -->
+        <section id="leadership" aria-labelledby="leadership-heading">
+            <h2 id="leadership-heading"><span class="icon">🎓</span> Why Phenomenology for Educational Leaders?</h2>
+            
+            <p>As educational leaders, we are constantly making decisions that affect the lived experiences of students, teachers, families, and communities. Phenomenology offers us a way to ground our leadership in deep understanding of how educational policies, practices, and changes are actually experienced by those we serve.</p>
+
+            <div class="leadership-why">
+                <div class="leadership-card">
+                    <h4>✨ Centers Lived Experience</h4>
+                    <div class="contrast">
+                        <div class="contrast-item instead">
+                            Making decisions based solely on data, policies, or "best practices"
+                        </div>
+                        <div class="contrast-item phenomenology">
+                            Starting with how policies, changes, and decisions are actually lived and experienced by those affected
+                        </div>
+                    </div>
+                    <div class="example-box">
+                        Before implementing a new teacher evaluation system, a phenomenological leader asks: "What is the lived experience of being evaluated? What does it feel like? What meanings do teachers attach to evaluation?"
+                    </div>
+                </div>
+
+                <div class="leadership-card">
+                    <h4>🔍 Challenges Assumptions</h4>
+                    <div class="contrast">
+                        <div class="contrast-item instead">
+                            Accepting conventional wisdom about what students, teachers, or families need
+                        </div>
+                        <div class="contrast-item phenomenology">
+                            Bracketing assumptions to see situations freshly and hear authentic voices
+                        </div>
+                    </div>
+                    <div class="example-box">
+                        Rather than assuming why attendance is declining, a phenomenological leader suspends judgment and asks: "What is the experience of coming to school for students who are frequently absent? What does 'attendance' mean in their lifeworld?"
+                    </div>
+                </div>
+
+                <div class="leadership-card">
+                    <h4>💜 Promotes Empathy & Understanding</h4>
+                    <div class="contrast">
+                        <div class="contrast-item instead">
+                            Viewing stakeholders through roles, categories, or performance metrics
+                        </div>
+                        <div class="contrast-item phenomenology">
+                            Developing rich understanding of diverse perspectives and experiences
+                        </div>
+                    </div>
+                    <div class="example-box">
+                        When addressing conflict between teachers and administration, a phenomenological leader seeks to understand: "What is it like to be a teacher in this building right now? How is the current situation lived from their perspective?"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITIES SECTION -->
+        <section id="activities" aria-labelledby="activities-heading">
+            <h2 id="activities-heading"><span class="icon">✏️</span> This Week's Activities</h2>
+            
+            <p>Complete both activities and submit them via Blackboard by the end of Week 1.</p>
+
+            <!-- Activity 1 -->
+            <div class="activity-card">
+                <div class="activity-header">
+                    <h3 class="activity-title">Activity 1: Reflective Writing (300 words)</h3>
+                    <div class="activity-meta">
+                        <span class="badge badge-required">Required</span>
+                        <span class="badge badge-time">⏱️ 20-25 minutes</span>
+                    </div>
+                </div>
+                <div class="activity-body">
+                    <div class="activity-purpose">
+                        This activity helps you connect phenomenology to your own lived experience before you study others' experiences. Strong phenomenological researchers are deeply reflective about their own experiential life.
+                    </div>
+
+                    <h4>Instructions:</h4>
+                    <ol class="instructions-list">
+                        <li><strong>Download the template</strong> — Get the structured template below to guide your writing</li>
+                        <li><strong>Choose a powerful educational experience</strong> — Select a specific moment that was meaningful or memorable</li>
+                        <li><strong>Describe phenomenologically</strong> — Write 300 words capturing it AS IT WAS LIVED (sights, sounds, feelings, sensations, bodily awareness)</li>
+                        <li><strong>Reflect on meaning</strong> — What made this experience significant? What was essential about it?</li>
+                        <li><strong>Save your work</strong> — Save as: <code>YourLastName_Activity1_Reflection.docx</code></li>
+                        <li><strong>Submit via Blackboard</strong> — Upload your completed reflection</li>
+                    </ol>
+
+                    <h4>Resources:</h4>
+                    <div class="resources-row">
+                        <a href="Activity1_Reflective_Writing_Template.docx" class="resource-btn primary" download>
+                            📄 Download Writing Template
+                        </a>
+                    </div>
+
+                    <div class="submission-box">
+                        <h4>📤 Submit Activity 1</h4>
+                        <div class="file-requirements">
+                            <strong>File Requirements:</strong>
+                            <ul>
+                                <li><strong>Format:</strong> .docx</li>
+                                <li><strong>Naming:</strong> YourLastName_Activity1_Reflection.docx</li>
+                                <li><strong>Size:</strong> Maximum 10MB</li>
+                            </ul>
+                        </div>
+                        <p class="submit-note">Upload your file to Blackboard in the Week 1 Assignments folder.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 2 -->
+            <div class="activity-card">
+                <div class="activity-header">
+                    <h3 class="activity-title">Activity 2: Concept Mapping</h3>
+                    <div class="activity-meta">
+                        <span class="badge badge-required">Required</span>
+                        <span class="badge badge-time">⏱️ 15-20 minutes</span>
+                    </div>
+                </div>
+                <div class="activity-body">
+                    <div class="activity-purpose">
+                        Creating a concept map helps you visualize relationships between phenomenological concepts. This isn't just busywork—visualizing abstract concepts aids retention and understanding.
+                    </div>
+
+                    <h4>Instructions:</h4>
+                    <ol class="instructions-list">
+                        <li><strong>Download the template</strong> — Get the concept map template (or create your own using digital tools)</li>
+                        <li><strong>Add the five core concepts</strong> — Lived Experience, Intentionality, Bracketing, Phenomenological Reduction, Essence</li>
+                        <li><strong>Define each concept</strong> — Add brief definitions to each node</li>
+                        <li><strong>Draw connections</strong> — Show relationships between concepts with labeled arrows</li>
+                        <li><strong>Add examples</strong> — Include educational leadership examples for each concept</li>
+                        <li><strong>Reflect</strong> — Answer the reflection questions on the template</li>
+                        <li><strong>Save your work</strong> — Save as: <code>YourLastName_Activity2_ConceptMap.pdf</code></li>
+                        <li><strong>Submit via Blackboard</strong> — Upload your completed concept map</li>
+                    </ol>
+
+                    <h4>Resources:</h4>
+                    <div class="resources-row">
+                        <a href="Activity2_Concept_Map_Template.docx" class="resource-btn primary" download>
+                            📄 Download Concept Map Template
+                        </a>
+                    </div>
+
+                    <div class="submission-box">
+                        <h4>📤 Submit Activity 2</h4>
+                        <div class="file-requirements">
+                            <strong>File Requirements:</strong>
+                            <ul>
+                                <li><strong>Format:</strong> .docx or .pdf</li>
+                                <li><strong>Naming:</strong> YourLastName_Activity2_ConceptMap.pdf</li>
+                                <li><strong>Size:</strong> Maximum 10MB</li>
+                            </ul>
+                        </div>
+                        <p class="submit-note">Upload your file to Blackboard in the Week 1 Assignments folder.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discussion Forum -->
+            <div class="discussion-card">
+                <h3>💬 Discussion Forum: Your Phenomenological Inquiry Begins</h3>
+                
+                <p>Select one educational phenomenon relevant to your leadership context and post a 300-400 word response addressing:</p>
+
+                <div class="discussion-prompt">
+                    <ol>
+                        <li><strong>Describe the phenomenon:</strong> What is it? Why does it matter?</li>
+                        <li><strong>Explain the phenomenological fit:</strong> Why is phenomenology suited to understanding this?</li>
+                        <li><strong>Pose questions:</strong> What specific questions would you explore?</li>
+                    </ol>
+                </div>
+
+                <div class="peer-response">
+                    <strong>Peer Responses:</strong> Respond to <strong>TWO</strong> colleagues with additional questions and connections.
+                </div>
+
+                <div class="grading-info">
+                    <div>
+                        <strong>💯 Grading:</strong> This discussion is worth <strong>100 points</strong> and will be assessed using the rubric below. Focus on depth of phenomenological thinking rather than having the "right" phenomenon.
+                    </div>
+                    <span class="points-badge">100 pts</span>
+                </div>
+
+                <div class="resources-row" style="margin-top: 1.25rem;">
+                    <a href="Discussion_Forum_Rubric.docx" class="resource-btn" download>
+                        📋 Download Discussion Rubric
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>EDL 599: Critical Phenomenology · Spring 2026 · Dr. M. Boudreaux</p>
+        <p>Southern Connecticut State University · Department of Educational Leadership and Policy Studies</p>
+    </footer>
+
+    <script>
+        // Expandable sections
+        document.querySelectorAll('.expandable').forEach(section => {
+            const header = section.querySelector('.expandable-header');
+            header.addEventListener('click', () => {
+                section.classList.toggle('open');
+            });
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    section.classList.toggle('open');
+                }
+            });
+        });
+
+        // Navigation active state
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            rootMargin: '-20% 0px -80% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Smooth scroll for nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const target = document.querySelector(targetId);
+                const navHeight = document.querySelector('.module-nav').offsetHeight;
+                const targetPosition = target.offsetTop - navHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Concept cards interaction (for accessibility)
+        document.querySelectorAll('.concept-card').forEach(card => {
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.classList.toggle('expanded');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
